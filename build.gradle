@@ -4,27 +4,23 @@ plugins {
     id 'application'
 }
 
-
 group 'test.trigan'
 version '1.0-SNAPSHOT'
+
+task stage(dependsOn: ['installDist'])
 
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url "https://kotlin.bintray.com/kotlinx"
-    }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
 dependencies {
     implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
-    implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-serialization:$ktor_version"
-    implementation 'com.michaelstrasser:ktor-features-zipkin:0.2.12'
-    implementation 'de.nielsfalk.ktor:ktor-swagger:0.5.0'
-    implementation "io.ktor:ktor-gson:$ktor_version"
-
+    implementation "ch.qos.logback:logback-classic:$logback_version"
+    implementation "com.michaelstrasser:ktor-features-zipkin:0.2.12"
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
@@ -37,5 +33,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'test.trigan.emailgen.ApplicationKt'
+    mainClassName = "test.trigan.emailgen.ApplicationKt"
 }

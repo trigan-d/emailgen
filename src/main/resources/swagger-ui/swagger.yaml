@@ -1,0 +1,86 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Email address generator API
+  contact:
+    name: Dmitry Solovyov
+    email: trigan.sda@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+
+paths:
+  /emails/all:
+    get:
+      summary: get all person emails ordered alphabetically
+      operationId: getAllPersonEmails
+      produces:
+        - application/json
+      responses:
+        200:
+          description: All generated emails
+          schema:
+            type: array
+            items:
+              type: string
+            example: ["John Doe <john.doe@revevol.it>", "Ron Green <r.green@revevol.it>"]
+  /persons/replace:
+    post:
+      summary: rewrite all existing persons with the new ones
+      operationId: resetPersons
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: personNames
+          description: List of person names
+          schema:
+            type: array
+            items:
+              type: string
+            example: [
+              "John Doe",
+              "Jane Doe",
+              "Jim Doe",
+              "Jim Doe",
+              "Jim Doe",
+              "Alice",
+              "Patrick O\u0027Connel",
+              "Jean-Claude Van Damme"
+            ]
+      responses:
+        200:
+          description: success
+        400:
+          description: invalid input
+  /persons/append:
+    post:
+      summary: append new persons
+      operationId: appendPersons
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: personNames
+          description: List of person names
+          schema:
+            type: array
+            items:
+              type: string
+            example: [
+              "John Doe",
+              "Jane Doe",
+              "Jim Doe",
+              "Jim Doe",
+              "Jim Doe",
+              "Alice",
+              "Patrick O\u0027Connel",
+              "Jean-Claude Van Damme"
+            ]
+      responses:
+        200:
+          description: success
+        400:
+          description: invalid input

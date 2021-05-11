@@ -1,1 +1,1 @@
-web:    java -jar target/emailgen.jar
+web:    ./build/install/emailgen/bin/emailgen
