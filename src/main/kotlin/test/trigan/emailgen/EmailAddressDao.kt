@@ -25,5 +25,3 @@ class InMemoryEmailAddressDao : EmailAddressDao {
     override fun saveIfAvailable(EmailAddress: EmailAddress) =
         addressToPersonalName.putIfAbsent(EmailAddress.address, EmailAddress.personalName) == null
 }
-
-val emailAddressDao = InMemoryEmailAddressDao()

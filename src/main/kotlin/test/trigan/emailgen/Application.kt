@@ -14,22 +14,20 @@ import mjs.ktor.features.zipkin.zipkinMdc
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-fun Application.module(testing: Boolean = false) {
+fun Application.coreModule() {
     install(ContentNegotiation) { json() }
     install(DefaultHeaders)
-    install(ZipkinIds)
-    install(CallLogging) {
-        filter { call -> !call.request.path().startsWith("/apidocs") }
-        zipkinMdc()
-    }
     install(StatusPages) {
         exception<SerializationException> { cause ->
             call.respondText(text = cause.message ?: "Serialization error", status = HttpStatusCode.BadRequest)
             throw cause
         }
     }
-
-    registerPersonEmailRoutes()
+    install(ZipkinIds)
+    install(CallLogging) {
+        filter { call -> !call.request.path().startsWith("/apidocs") }
+        zipkinMdc()
+    }
 
     routing {
         static("apidocs") { resources("swagger-ui") }

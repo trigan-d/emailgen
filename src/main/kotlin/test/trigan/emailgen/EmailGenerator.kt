@@ -26,5 +26,3 @@ class EmailGenerator(val emailAddressDao: EmailAddressDao) {
         yieldAll(generateSequence(2) { it + 1 }.map { "$shortForm.$it" }) // j.m.jarre.2, j.m.jarre.3, etc
     }
 }
-
-val emailGenerator = EmailGenerator(emailAddressDao)
