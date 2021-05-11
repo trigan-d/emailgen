@@ -1,0 +1,5 @@
+{
+  "name": "Email generator",
+  "description": "Email generator test task for AODocs  ",
+  "image": "heroku/java"
+}
