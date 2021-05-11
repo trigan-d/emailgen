@@ -63,7 +63,7 @@ fun Route.replacePersonEmails() {
 private fun ApplicationCall.generateAddresses(personalNames: List<String>) {
     val domain = application.environment.config.property("emailgen.domain").getString()
     personalNames.forEach { personalName ->
-        val generatedAddress = generateAndSaveEmailAddress(personalName, domain)
+        val generatedAddress = emailGenerator.generateAndSaveEmailAddress(personalName, domain)
         application.log.info("Generated email address $generatedAddress for '$personalName'")
     }
 }

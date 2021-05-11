@@ -15,7 +15,7 @@ interface EmailAddressDao {
 }
 
 // dummy non-persistent implementation
-val emailAddressDao = object : EmailAddressDao {
+class InMemoryEmailAddressDao : EmailAddressDao {
     private val addressToPersonalName = ConcurrentHashMap<String, String>()
 
     override fun clear() = addressToPersonalName.clear()
@@ -25,3 +25,5 @@ val emailAddressDao = object : EmailAddressDao {
     override fun saveIfAvailable(EmailAddress: EmailAddress) =
         addressToPersonalName.putIfAbsent(EmailAddress.address, EmailAddress.personalName) == null
 }
+
+val emailAddressDao = InMemoryEmailAddressDao()
